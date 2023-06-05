@@ -117,7 +117,7 @@ pub fn enemy_hit_player(
 
             if distance < player_radius + enemy_radius {
                 let sound_effect = asset_server.load("audio/explosionCrunch_000.ogg");
-                audio.play(sound_effect);
+                audio.play_with_settings(sound_effect, PlaybackSettings::ONCE.with_volume(0.2));
                 commands.entity(player_entity).despawn();
                 game_over_event_writer.send(GameOver { score: score.value });
             }
@@ -143,7 +143,7 @@ pub fn player_hit_star(
 
             if distance < player_radius + star_radius {
                 let sound_effect = asset_server.load("audio/laserLarge_000.ogg");
-                audio.play(sound_effect);
+                audio.play_with_settings(sound_effect, PlaybackSettings::ONCE.with_volume(0.2));
                 score.value += 1;
                 commands.entity(star_entity).despawn();
             }
