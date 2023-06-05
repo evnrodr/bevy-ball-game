@@ -82,7 +82,7 @@ pub fn update_enemy_direction(
                 sound_effect_2
             };
 
-            audio.play(sound_effect);
+            audio.play_with_settings(sound_effect, PlaybackSettings::ONCE.with_volume(0.2));
         }
     }
 }

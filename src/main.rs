@@ -1,13 +1,13 @@
+use bevy::prelude::*;
 pub mod events;
+
 mod game;
-mod main_menu;
 mod systems;
+mod ui;
 
 use game::GamePlugin;
-use main_menu::MainMenuPlugin;
 use systems::*;
-
-use bevy::prelude::*;
+use ui::GameUIPlugin;
 
 fn main() {
     App::new()
@@ -15,8 +15,8 @@ fn main() {
         .add_plugins(DefaultPlugins)
         .add_state::<AppState>()
         // My plugins
-        .add_plugin(MainMenuPlugin)
         .add_plugin(GamePlugin)
+        .add_plugin(GameUIPlugin)
         // Startup systems
         .add_startup_system(spawn_camera)
         // Systems

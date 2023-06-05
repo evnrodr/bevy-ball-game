@@ -1,7 +1,12 @@
 use bevy::prelude::*;
 
-use crate::game::ui::game_over_menu::components::*;
-use crate::game::ui::game_over_menu::styles::*;
+use crate::ui::game_over_menu::{
+    components::{FinalScoreText, GameOverMenu, MainMenuButton, QuitButton, RestartButton},
+    styles::{
+        get_button_text_style, get_final_score_text_style, get_title_text_style, BACKGROUND_COLOR,
+        BUTTON_STYLE, GAME_OVER_MENU_CONTAINER_STYLE, GAME_OVER_MENU_STYLE, NORMAL_BUTTON,
+    },
+};
 
 pub fn spawn_game_over_menu(mut commands: Commands, asset_server: Res<AssetServer>) {
     build_game_over_menu(&mut commands, &asset_server);

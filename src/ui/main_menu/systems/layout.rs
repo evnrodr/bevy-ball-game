@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use crate::main_menu::{
+use crate::ui::main_menu::{
     components::{MainMenu, PlayButton, QuitButton},
     styles::{
         get_button_text_style, BUTTON_STYLE, IMAGE_STYLE, MAIN_MENU_STYLE, NORMAL_BUTTON_COLOR,
