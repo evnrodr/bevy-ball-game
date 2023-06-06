@@ -1,56 +1,61 @@
 use bevy::prelude::*;
 
-use crate::game::ui::pause_menu::components::{
-    MainMenuButton, PauseMenu, QuitButton, ResumeButton,
+use crate::ui::{
+    common_styles::{get_text_style, BUTTON_STYLE},
+    constants::{BACKGROUND_COLOR, NORMAL_BUTTON},
+    game_over_menu::{
+        components::{FinalScoreText, GameOverMenu, MainMenuButton, QuitButton, RestartButton},
+        styles::{GAME_OVER_MENU_CONTAINER_STYLE, GAME_OVER_MENU_STYLE},
+    },
 };
-use crate::game::ui::pause_menu::styles::*;
 
-pub fn spawn_pause_menu(mut commands: Commands, asset_server: Res<AssetServer>) {
-    println!("Spawning Pause Menu");
-    build_pause_menu(&mut commands, &asset_server);
+pub fn spawn_game_over_menu(mut commands: Commands, asset_server: Res<AssetServer>) {
+    build_game_over_menu(&mut commands, &asset_server);
 }
 
-pub fn despawn_pause_menu(
-    mut commands: Commands,
-    pause_menu_query: Query<Entity, With<PauseMenu>>,
-) {
-    if let Ok(pause_menu_entity) = pause_menu_query.get_single() {
-        commands.entity(pause_menu_entity).despawn_recursive();
-    }
-}
-
-// System Piping Example
-pub fn build_pause_menu(commands: &mut Commands, asset_server: &Res<AssetServer>) -> Entity {
-    let pause_menu_entity = commands
+pub fn build_game_over_menu(commands: &mut Commands, asset_server: &Res<AssetServer>) -> Entity {
+    let game_over_menu_entity = commands
         .spawn((
             NodeBundle {
-                style: PAUSE_MENU_STYLE,
-                z_index: ZIndex::Local(1), // See Ref. 1
+                style: GAME_OVER_MENU_STYLE,
+                z_index: ZIndex::Local(2),
                 ..default()
             },
-            PauseMenu {},
+            GameOverMenu {},
         ))
         .with_children(|parent| {
             parent
                 .spawn(NodeBundle {
-                    style: PAUSE_MENU_CONTAINER_STYLE,
+                    style: GAME_OVER_MENU_CONTAINER_STYLE,
                     background_color: BACKGROUND_COLOR.into(),
                     ..default()
                 })
                 .with_children(|parent| {
-                    // Title
                     parent.spawn(TextBundle {
                         text: Text {
                             sections: vec![TextSection::new(
-                                "Pause Menu",
-                                get_title_text_style(&asset_server),
+                                "Game Over",
+                                get_text_style(&asset_server, 64.0),
                             )],
                             alignment: TextAlignment::Center,
                             ..default()
                         },
                         ..default()
                     });
-                    // Resume Button
+                    parent.spawn((
+                        TextBundle {
+                            text: Text {
+                                sections: vec![TextSection::new(
+                                    "Your final score was:",
+                                    get_text_style(&asset_server, 48.0),
+                                )],
+                                alignment: TextAlignment::Center,
+                                ..default()
+                            },
+                            ..default()
+                        },
+                        FinalScoreText {},
+                    ));
                     parent
                         .spawn((
                             ButtonBundle {
@@ -58,15 +63,15 @@ pub fn build_pause_menu(commands: &mut Commands, asset_server: &Res<AssetServer>
                                 background_color: NORMAL_BUTTON.into(),
                                 ..default()
                             },
-                            ResumeButton {},
+                            RestartButton {},
                         ))
                         .with_children(|parent| {
                             parent.spawn(TextBundle {
                                 style: Style { ..default() },
                                 text: Text {
                                     sections: vec![TextSection::new(
-                                        "Resume",
-                                        get_button_text_style(&asset_server),
+                                        "Restart",
+                                        get_text_style(&asset_server, 32.0),
                                     )],
                                     alignment: TextAlignment::Center,
                                     ..default()
@@ -74,7 +79,6 @@ pub fn build_pause_menu(commands: &mut Commands, asset_server: &Res<AssetServer>
                                 ..default()
                             });
                         });
-                    // Main Menu Button
                     parent
                         .spawn((
                             ButtonBundle {
@@ -90,7 +94,7 @@ pub fn build_pause_menu(commands: &mut Commands, asset_server: &Res<AssetServer>
                                 text: Text {
                                     sections: vec![TextSection::new(
                                         "Main Menu",
-                                        get_button_text_style(&asset_server),
+                                        get_text_style(&asset_server, 32.0),
                                     )],
                                     alignment: TextAlignment::Center,
                                     ..default()
@@ -114,7 +118,7 @@ pub fn build_pause_menu(commands: &mut Commands, asset_server: &Res<AssetServer>
                                 text: Text {
                                     sections: vec![TextSection::new(
                                         "Quit",
-                                        get_button_text_style(&asset_server),
+                                        get_text_style(&asset_server, 32.0),
                                     )],
                                     alignment: TextAlignment::Center,
                                     ..default()
@@ -126,5 +130,14 @@ pub fn build_pause_menu(commands: &mut Commands, asset_server: &Res<AssetServer>
         })
         .id();
 
-    pause_menu_entity
+    game_over_menu_entity
+}
+
+pub fn despawn_game_over_menu(
+    mut commands: Commands,
+    game_over_menu_query: Query<Entity, With<GameOverMenu>>,
+) {
+    if let Ok(game_over_menu_entity) = game_over_menu_query.get_single() {
+        commands.entity(game_over_menu_entity).despawn_recursive();
+    }
 }

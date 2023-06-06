@@ -1,9 +1,12 @@
-use bevy::app::AppExit;
-use bevy::prelude::*;
+use bevy::{app::AppExit, prelude::*};
 
-use crate::game::ui::game_over_menu::components::*;
-use crate::game::ui::game_over_menu::styles::*;
-use crate::AppState;
+use crate::{
+    ui::{
+        constants::{HOVERED_BUTTON, NORMAL_BUTTON, PRESSED_BUTTON},
+        game_over_menu::components::{MainMenuButton, QuitButton, RestartButton},
+    },
+    AppState,
+};
 
 pub fn interact_with_restart_button(
     mut button_query: Query<

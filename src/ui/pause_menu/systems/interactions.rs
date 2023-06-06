@@ -1,10 +1,13 @@
-use bevy::app::AppExit;
-use bevy::prelude::*;
+use bevy::{app::AppExit, prelude::*};
 
-use crate::game::ui::pause_menu::components::*;
-use crate::game::ui::pause_menu::styles::*;
-use crate::game::SimulationState;
-use crate::AppState;
+use crate::{
+    game::SimulationState,
+    ui::{
+        constants::{HOVERED_BUTTON, NORMAL_BUTTON, PRESSED_BUTTON},
+        pause_menu::components::{MainMenuButton, QuitButton, ResumeButton},
+    },
+    AppState,
+};
 
 pub fn interact_with_resume_button(
     mut button_query: Query<

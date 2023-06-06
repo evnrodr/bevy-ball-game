@@ -1,7 +1,13 @@
 use bevy::prelude::*;
 
-use crate::game::ui::hud::components::*;
-use crate::game::ui::hud::styles::*;
+use crate::ui::{
+    common_styles::{get_image_style, get_text_style},
+    constants::BACKGROUND_COLOR,
+    hud::{
+        components::{EnemyText, ScoreText, HUD},
+        styles::{HUD_STYLE, LHS_STYLE, RHS_STYLE},
+    },
+};
 
 pub fn spawn_hud(mut commands: Commands, asset_server: Res<AssetServer>) {
     build_hud(&mut commands, &asset_server);
@@ -27,7 +33,7 @@ pub fn build_hud(commands: &mut Commands, asset_server: &Res<AssetServer>) -> En
                 .with_children(|parent| {
                     // Star Image
                     parent.spawn(ImageBundle {
-                        style: IMAGE_STYLE,
+                        style: get_image_style(48.0, 48.0),
                         image: asset_server.load("sprites/star.png").into(),
                         ..default()
                     });
@@ -38,7 +44,7 @@ pub fn build_hud(commands: &mut Commands, asset_server: &Res<AssetServer>) -> En
                             text: Text {
                                 sections: vec![TextSection::new(
                                     "0",
-                                    get_text_style(&asset_server),
+                                    get_text_style(&asset_server, 64.0),
                                 )],
                                 alignment: TextAlignment::Center,
                                 ..default()
@@ -63,7 +69,7 @@ pub fn build_hud(commands: &mut Commands, asset_server: &Res<AssetServer>) -> En
                             text: Text {
                                 sections: vec![TextSection::new(
                                     "0",
-                                    get_text_style(&asset_server),
+                                    get_text_style(&asset_server, 64.0),
                                 )],
                                 alignment: TextAlignment::Center,
                                 ..default()
@@ -74,7 +80,7 @@ pub fn build_hud(commands: &mut Commands, asset_server: &Res<AssetServer>) -> En
                     ));
                     // Enemy Image
                     parent.spawn(ImageBundle {
-                        style: IMAGE_STYLE,
+                        style: get_image_style(48.0, 48.0),
                         image: asset_server.load("sprites/ball_red_large.png").into(),
                         ..default()
                     });

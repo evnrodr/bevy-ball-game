@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use super::STAR_SPAWN_TIME;
+use crate::game::constants::STAR_SPAWN_TIME;
 
 #[derive(Resource)]
 pub struct StarSpawnTimer {

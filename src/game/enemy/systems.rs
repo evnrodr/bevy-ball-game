@@ -2,9 +2,12 @@ use bevy::prelude::*;
 use bevy::window::PrimaryWindow;
 use rand::prelude::*;
 
+use crate::game::constants::ENEMY_SIZE;
+use crate::game::constants::ENEMY_SPEED;
+use crate::game::constants::NUMBER_OF_ENEMIES;
+
 use super::components::*;
 use super::resources::*;
-use super::{ENEMY_SIZE, ENEMY_SPEED, NUMBER_OF_ENEMIES};
 
 pub fn spawn_enemies(
     mut commands: Commands,
@@ -82,7 +85,7 @@ pub fn update_enemy_direction(
                 sound_effect_2
             };
 
-            audio.play(sound_effect);
+            audio.play_with_settings(sound_effect, PlaybackSettings::ONCE.with_volume(0.2));
         }
     }
 }

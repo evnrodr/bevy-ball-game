@@ -3,14 +3,10 @@ use bevy::window::PrimaryWindow;
 
 use super::components::*;
 use crate::events::GameOver;
+use crate::game::constants::{ENEMY_SIZE, PLAYER_SIZE, PLAYER_SPEED, STAR_SIZE};
 use crate::game::enemy::components::*;
-use crate::game::enemy::ENEMY_SIZE;
 use crate::game::score::resources::*;
 use crate::game::star::components::*;
-use crate::game::star::STAR_SIZE;
-
-pub const PLAYER_SIZE: f32 = 64.0;
-pub const PLAYER_SPEED: f32 = 500.0;
 
 pub fn spawn_player(
     mut commands: Commands,
@@ -109,19 +105,41 @@ pub fn enemy_hit_player(
 ) {
     if let Ok((player_entity, player_transform)) = player_query.get_single_mut() {
         for enemy_transform in enemy_query.iter() {
-            let distance = player_transform
-                .translation
-                .distance(enemy_transform.translation);
-            let player_radius = PLAYER_SIZE / 2.0;
-            let enemy_radius = ENEMY_SIZE / 2.0;
+            // Rectangle Collision
+            let player_w = PLAYER_SIZE;
+            let player_h = PLAYER_SIZE;
+            let player_x = player_transform.translation.x;
+            let player_y = player_transform.translation.y;
 
-            if distance < player_radius + enemy_radius {
-                println!("Enemy hit player! Game over!");
+            let enemy_w = ENEMY_SIZE;
+            let enemy_h = ENEMY_SIZE;
+            let enemy_x = enemy_transform.translation.x;
+            let enemy_y = enemy_transform.translation.y;
+
+            if player_x < enemy_x + enemy_w
+                && player_x + player_w > enemy_x
+                && player_y < enemy_y + enemy_h
+                && player_h + player_y > enemy_y
+            {
                 let sound_effect = asset_server.load("audio/explosionCrunch_000.ogg");
-                audio.play(sound_effect);
+                audio.play_with_settings(sound_effect, PlaybackSettings::ONCE.with_volume(0.2));
                 commands.entity(player_entity).despawn();
                 game_over_event_writer.send(GameOver { score: score.value });
             }
+
+            // Circle Collision
+            // let distance = player_transform
+            //     .translation
+            //     .distance(enemy_transform.translation);
+            // let player_radius = PLAYER_SIZE / 2.0;
+            // let enemy_radius = ENEMY_SIZE / 2.0;
+
+            // if distance < player_radius + enemy_radius {
+            // let sound_effect = asset_server.load("audio/explosionCrunch_000.ogg");
+            // audio.play_with_settings(sound_effect, PlaybackSettings::ONCE.with_volume(0.2));
+            // commands.entity(player_entity).despawn();
+            // game_over_event_writer.send(GameOver { score: score.value });
+            // }
         }
     }
 }
@@ -144,7 +162,7 @@ pub fn player_hit_star(
 
             if distance < player_radius + star_radius {
                 let sound_effect = asset_server.load("audio/laserLarge_000.ogg");
-                audio.play(sound_effect);
+                audio.play_with_settings(sound_effect, PlaybackSettings::ONCE.with_volume(0.2));
                 score.value += 1;
                 commands.entity(star_entity).despawn();
             }

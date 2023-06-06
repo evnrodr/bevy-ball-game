@@ -1,18 +1,17 @@
 use bevy::prelude::*;
 
+mod constants;
 pub mod enemy;
 mod player;
 pub mod score;
 pub mod star;
 mod systems;
-mod ui;
 
 use enemy::EnemyPlugin;
 use player::PlayerPlugin;
 use score::ScorePlugin;
 use star::StarPlugin;
 use systems::*;
-use ui::GameUIPlugin;
 
 use crate::{events::GameOver, AppState};
 
@@ -27,7 +26,6 @@ impl Plugin for GamePlugin {
             .add_plugin(PlayerPlugin)
             .add_plugin(ScorePlugin)
             .add_plugin(StarPlugin)
-            .add_plugin(GameUIPlugin)
             .add_system(toggle_simulation.run_if(in_state(AppState::Game)))
             .add_system(resume_simulation.in_schedule(OnExit(AppState::Game)));
     }

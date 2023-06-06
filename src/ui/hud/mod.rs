@@ -1,12 +1,12 @@
+use bevy::prelude::*;
 mod components;
 mod styles;
 mod systems;
 
 use systems::layout::*;
 
-use crate::game::ui::hud::systems::updates::{update_enemy_text, update_score_text};
+use crate::ui::hud::systems::updates::{update_enemy_text, update_score_text};
 use crate::AppState;
-use bevy::prelude::*;
 
 pub struct HudPlugin;
 

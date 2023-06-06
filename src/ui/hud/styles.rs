@@ -1,7 +1,5 @@
 use bevy::prelude::*;
 
-pub const BACKGROUND_COLOR: Color = Color::rgba(0.25, 0.25, 0.25, 0.5);
-
 pub const HUD_STYLE: Style = Style {
     display: Display::Flex,
     flex_direction: FlexDirection::Row,
@@ -30,17 +28,3 @@ pub const RHS_STYLE: Style = Style {
     margin: UiRect::new(Val::Px(0.0), Val::Px(32.0), Val::Px(0.0), Val::Px(0.0)),
     ..Style::DEFAULT
 };
-
-pub const IMAGE_STYLE: Style = Style {
-    size: Size::new(Val::Px(48.0), Val::Px(48.0)),
-    margin: UiRect::new(Val::Px(8.0), Val::Px(8.0), Val::Px(8.0), Val::Px(8.0)),
-    ..Style::DEFAULT
-};
-
-pub fn get_text_style(asset_server: &Res<AssetServer>) -> TextStyle {
-    TextStyle {
-        font: asset_server.load("fonts/FiraSans-Bold.ttf"),
-        font_size: 64.0,
-        color: Color::rgb(1.0, 1.0, 1.0),
-    }
-}
