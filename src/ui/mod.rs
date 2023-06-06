@@ -1,3 +1,4 @@
+mod common_styles;
 mod constants;
 mod game_over_menu;
 mod hud;

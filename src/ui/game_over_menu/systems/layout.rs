@@ -1,13 +1,11 @@
 use bevy::prelude::*;
 
 use crate::ui::{
+    common_styles::{get_text_style, BUTTON_STYLE},
     constants::{BACKGROUND_COLOR, NORMAL_BUTTON},
     game_over_menu::{
         components::{FinalScoreText, GameOverMenu, MainMenuButton, QuitButton, RestartButton},
-        styles::{
-            get_button_text_style, get_final_score_text_style, get_title_text_style, BUTTON_STYLE,
-            GAME_OVER_MENU_CONTAINER_STYLE, GAME_OVER_MENU_STYLE,
-        },
+        styles::{GAME_OVER_MENU_CONTAINER_STYLE, GAME_OVER_MENU_STYLE},
     },
 };
 
@@ -20,7 +18,7 @@ pub fn build_game_over_menu(commands: &mut Commands, asset_server: &Res<AssetSer
         .spawn((
             NodeBundle {
                 style: GAME_OVER_MENU_STYLE,
-                z_index: ZIndex::Local(2), // See Ref. 1
+                z_index: ZIndex::Local(2),
                 ..default()
             },
             GameOverMenu {},
@@ -33,25 +31,23 @@ pub fn build_game_over_menu(commands: &mut Commands, asset_server: &Res<AssetSer
                     ..default()
                 })
                 .with_children(|parent| {
-                    // Title
                     parent.spawn(TextBundle {
                         text: Text {
                             sections: vec![TextSection::new(
                                 "Game Over",
-                                get_title_text_style(&asset_server),
+                                get_text_style(&asset_server, 64.0),
                             )],
                             alignment: TextAlignment::Center,
                             ..default()
                         },
                         ..default()
                     });
-                    // Final Score Text
                     parent.spawn((
                         TextBundle {
                             text: Text {
                                 sections: vec![TextSection::new(
                                     "Your final score was:",
-                                    get_final_score_text_style(&asset_server),
+                                    get_text_style(&asset_server, 48.0),
                                 )],
                                 alignment: TextAlignment::Center,
                                 ..default()
@@ -60,7 +56,6 @@ pub fn build_game_over_menu(commands: &mut Commands, asset_server: &Res<AssetSer
                         },
                         FinalScoreText {},
                     ));
-                    // Restart Button
                     parent
                         .spawn((
                             ButtonBundle {
@@ -76,7 +71,7 @@ pub fn build_game_over_menu(commands: &mut Commands, asset_server: &Res<AssetSer
                                 text: Text {
                                     sections: vec![TextSection::new(
                                         "Restart",
-                                        get_button_text_style(&asset_server),
+                                        get_text_style(&asset_server, 32.0),
                                     )],
                                     alignment: TextAlignment::Center,
                                     ..default()
@@ -84,7 +79,6 @@ pub fn build_game_over_menu(commands: &mut Commands, asset_server: &Res<AssetSer
                                 ..default()
                             });
                         });
-                    // Main Menu Button
                     parent
                         .spawn((
                             ButtonBundle {
@@ -100,7 +94,7 @@ pub fn build_game_over_menu(commands: &mut Commands, asset_server: &Res<AssetSer
                                 text: Text {
                                     sections: vec![TextSection::new(
                                         "Main Menu",
-                                        get_button_text_style(&asset_server),
+                                        get_text_style(&asset_server, 32.0),
                                     )],
                                     alignment: TextAlignment::Center,
                                     ..default()
@@ -124,7 +118,7 @@ pub fn build_game_over_menu(commands: &mut Commands, asset_server: &Res<AssetSer
                                 text: Text {
                                     sections: vec![TextSection::new(
                                         "Quit",
-                                        get_button_text_style(&asset_server),
+                                        get_text_style(&asset_server, 32.0),
                                     )],
                                     alignment: TextAlignment::Center,
                                     ..default()
