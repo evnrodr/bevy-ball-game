@@ -1,5 +1,6 @@
 use bevy::prelude::*;
 
+mod constants;
 pub mod enemy;
 mod player;
 pub mod score;

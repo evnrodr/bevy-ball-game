@@ -3,14 +3,10 @@ use bevy::window::PrimaryWindow;
 
 use super::components::*;
 use crate::events::GameOver;
+use crate::game::constants::{ENEMY_SIZE, PLAYER_SIZE, PLAYER_SPEED, STAR_SIZE};
 use crate::game::enemy::components::*;
-use crate::game::enemy::ENEMY_SIZE;
 use crate::game::score::resources::*;
 use crate::game::star::components::*;
-use crate::game::star::STAR_SIZE;
-
-pub const PLAYER_SIZE: f32 = 64.0;
-pub const PLAYER_SPEED: f32 = 500.0;
 
 pub fn spawn_player(
     mut commands: Commands,
