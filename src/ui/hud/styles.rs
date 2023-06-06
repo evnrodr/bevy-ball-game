@@ -1,7 +1,5 @@
 use bevy::prelude::*;
 
-pub const BACKGROUND_COLOR: Color = Color::rgba(0.25, 0.25, 0.25, 0.5);
-
 pub const HUD_STYLE: Style = Style {
     display: Display::Flex,
     flex_direction: FlexDirection::Row,

@@ -1,10 +1,13 @@
 use bevy::prelude::*;
 
-use crate::ui::game_over_menu::{
-    components::{FinalScoreText, GameOverMenu, MainMenuButton, QuitButton, RestartButton},
-    styles::{
-        get_button_text_style, get_final_score_text_style, get_title_text_style, BACKGROUND_COLOR,
-        BUTTON_STYLE, GAME_OVER_MENU_CONTAINER_STYLE, GAME_OVER_MENU_STYLE, NORMAL_BUTTON,
+use crate::ui::{
+    constants::{BACKGROUND_COLOR, NORMAL_BUTTON},
+    game_over_menu::{
+        components::{FinalScoreText, GameOverMenu, MainMenuButton, QuitButton, RestartButton},
+        styles::{
+            get_button_text_style, get_final_score_text_style, get_title_text_style, BUTTON_STYLE,
+            GAME_OVER_MENU_CONTAINER_STYLE, GAME_OVER_MENU_STYLE,
+        },
     },
 };
 

@@ -2,9 +2,9 @@ use bevy::{app::AppExit, prelude::*};
 
 use crate::{
     game::SimulationState,
-    ui::pause_menu::{
-        components::{MainMenuButton, QuitButton, ResumeButton},
-        styles::{HOVERED_BUTTON, NORMAL_BUTTON, PRESSED_BUTTON},
+    ui::{
+        constants::{HOVERED_BUTTON, NORMAL_BUTTON, PRESSED_BUTTON},
+        pause_menu::components::{MainMenuButton, QuitButton, ResumeButton},
     },
     AppState,
 };

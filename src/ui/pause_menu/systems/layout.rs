@@ -1,10 +1,13 @@
 use bevy::prelude::*;
 
-use crate::ui::pause_menu::{
-    components::{MainMenuButton, PauseMenu, QuitButton, ResumeButton},
-    styles::{
-        get_button_text_style, get_title_text_style, BACKGROUND_COLOR, BUTTON_STYLE, NORMAL_BUTTON,
-        PAUSE_MENU_CONTAINER_STYLE, PAUSE_MENU_STYLE,
+use crate::ui::{
+    constants::{BACKGROUND_COLOR, NORMAL_BUTTON},
+    pause_menu::{
+        components::{MainMenuButton, PauseMenu, QuitButton, ResumeButton},
+        styles::{
+            get_button_text_style, get_title_text_style, BUTTON_STYLE, PAUSE_MENU_CONTAINER_STYLE,
+            PAUSE_MENU_STYLE,
+        },
     },
 };
 

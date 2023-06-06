@@ -1,3 +1,4 @@
+mod constants;
 mod game_over_menu;
 mod hud;
 mod main_menu;

@@ -1,8 +1,11 @@
 use bevy::prelude::*;
 
-use crate::ui::hud::{
-    components::{EnemyText, ScoreText, HUD},
-    styles::{get_text_style, BACKGROUND_COLOR, HUD_STYLE, IMAGE_STYLE, LHS_STYLE, RHS_STYLE},
+use crate::ui::{
+    constants::BACKGROUND_COLOR,
+    hud::{
+        components::{EnemyText, ScoreText, HUD},
+        styles::{get_text_style, HUD_STYLE, IMAGE_STYLE, LHS_STYLE, RHS_STYLE},
+    },
 };
 
 pub fn spawn_hud(mut commands: Commands, asset_server: Res<AssetServer>) {

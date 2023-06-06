@@ -1,9 +1,9 @@
 use bevy::{app::AppExit, prelude::*};
 
 use crate::{
-    ui::game_over_menu::{
-        components::{MainMenuButton, QuitButton, RestartButton},
-        styles::{HOVERED_BUTTON, NORMAL_BUTTON, PRESSED_BUTTON},
+    ui::{
+        constants::{HOVERED_BUTTON, NORMAL_BUTTON, PRESSED_BUTTON},
+        game_over_menu::components::{MainMenuButton, QuitButton, RestartButton},
     },
     AppState,
 };

@@ -1,9 +1,9 @@
 use bevy::{app::AppExit, prelude::*};
 
 use crate::{
-    ui::main_menu::{
-        components::{PlayButton, QuitButton},
-        styles::{HOVERED_BUTTON_COLOR, NORMAL_BUTTON_COLOR, PRESSED_BUTTON_COLOR},
+    ui::{
+        constants::{HOVERED_BUTTON, NORMAL_BUTTON, PRESSED_BUTTON},
+        main_menu::components::{PlayButton, QuitButton},
     },
     AppState,
 };
@@ -18,14 +18,14 @@ pub fn interact_with_play_button(
     if let Ok((interaction, mut background_color)) = button_query.get_single_mut() {
         match *interaction {
             Interaction::Clicked => {
-                *background_color = PRESSED_BUTTON_COLOR.into();
+                *background_color = PRESSED_BUTTON.into();
                 app_state_next_state.set(AppState::Game);
             }
             Interaction::Hovered => {
-                *background_color = HOVERED_BUTTON_COLOR.into();
+                *background_color = HOVERED_BUTTON.into();
             }
             Interaction::None => {
-                *background_color = NORMAL_BUTTON_COLOR.into();
+                *background_color = NORMAL_BUTTON.into();
             }
         }
     }
@@ -41,14 +41,14 @@ pub fn interact_with_quit_button(
     if let Ok((interaction, mut background_color)) = button_query.get_single_mut() {
         match *interaction {
             Interaction::Clicked => {
-                *background_color = PRESSED_BUTTON_COLOR.into();
+                *background_color = PRESSED_BUTTON.into();
                 app_exit_event_writer.send(AppExit);
             }
             Interaction::Hovered => {
-                *background_color = HOVERED_BUTTON_COLOR.into();
+                *background_color = HOVERED_BUTTON.into();
             }
             Interaction::None => {
-                *background_color = NORMAL_BUTTON_COLOR.into();
+                *background_color = NORMAL_BUTTON.into();
             }
         }
     }

@@ -1,10 +1,10 @@
 use bevy::prelude::*;
 
-use crate::ui::main_menu::{
-    components::{MainMenu, PlayButton, QuitButton},
-    styles::{
-        get_button_text_style, BUTTON_STYLE, IMAGE_STYLE, MAIN_MENU_STYLE, NORMAL_BUTTON_COLOR,
-        TITLE_STYLE,
+use crate::ui::{
+    constants::NORMAL_BUTTON,
+    main_menu::{
+        components::{MainMenu, PlayButton, QuitButton},
+        styles::{get_button_text_style, BUTTON_STYLE, IMAGE_STYLE, MAIN_MENU_STYLE, TITLE_STYLE},
     },
 };
 
@@ -60,7 +60,7 @@ pub fn build_main_menu(commands: &mut Commands, asset_server: &Res<AssetServer>)
                 .spawn((
                     ButtonBundle {
                         style: BUTTON_STYLE,
-                        background_color: NORMAL_BUTTON_COLOR.into(),
+                        background_color: NORMAL_BUTTON.into(),
                         ..default()
                     },
                     PlayButton {},
@@ -82,7 +82,7 @@ pub fn build_main_menu(commands: &mut Commands, asset_server: &Res<AssetServer>)
                 .spawn((
                     ButtonBundle {
                         style: BUTTON_STYLE,
-                        background_color: NORMAL_BUTTON_COLOR.into(),
+                        background_color: NORMAL_BUTTON.into(),
                         ..default()
                     },
                     QuitButton {},
